@@ -1,71 +1,62 @@
-// // import express from 'express'
-// // import mysql from 'mysql'
-// // import cors from 'cors'
-// // //import axios from 'axios'
+import express from 'express';
+import mysql from 'mysql';
+import cors from 'cors';
 
-// // const app =express()
-// // app.use(cors)
-// // const  db=mysql.createConnection({
-// //      host:"localhost",
-// //      user:"root",
-// //      password:"",
-// //      database:"crud"
-// // })
-// // app.get('/',(req, res)=>{
-// //    const sql ="SELECT * FROM users" ;
-// //    db.query(sql,(err,resullt)=>{
-// // if(err) return res.json({Message:"Failed to be fetched"})
-// //      return res.json(result);
-// //    }) 
-// // })
-// // app.listen(5000,()=>{
-// //      console.log("Server is running on http://localhost:5000")
-// // })
-// // const express=require('express')
-// import express from 'express'
-// import cors from 'cors'
-// // app.use(cors());
-// const app=express()
-// app.listen(8081,()=>{
-//      console.log("listening")
-// })
-import express from'express'
-import mysql from 'mysql'
-import cors from 'cors'
-const app=express()
-app.use(cors())
-const db=mysql.createConnection({
-     host:"localhost",
-     user:'root',
-     password:'',
-     database:'crud'
-})
-db.connect(err=>{
-     if(err){
-          console.log("Failed to be connected");
-          return;
-     }
-     else{
-          console.log("Connected successfully");
-          return;
-     }
-})
-//Get List of all students
-app.get('/user',(req,res)=>{
+const app = express();
 
-db.query("SELECT * from user",(err,result)=>{
-     if (err) {
-          console.log("Failed to search")
-          return res.status(500).json({Error:"Failed to retreive"});
-          
-     }
-     else{
-          
-          return res.status(200).json({Message:"Okay "})
-     }
-     res.json(result)
-})
-})
-app.listen(5000,()=>{
-     console.log('Sever is on ..')
-})
+// Middleware
+app.use(cors());
+app.use(express.json()); // To parse JSON data
+
+// Database Connection
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "crud"
+});
+
+db.connect(err => {
+    if (err) {
+        console.error("Failed to connect to database:", err);
+        return;
+    }
+    console.log("Connected successfully to database");
+});
+
+// Get List of All Users
+app.get('/user', (req, res) => {
+    const sql = "SELECT * FROM user"; // Ensure table name is correct
+
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error("Failed to retrieve users:", err);
+            return res.status(500).json({ Error: "Failed to retrieve users" });
+        }
+        res.json(result);
+    });
+});
+
+// Add New User
+app.post('/user', (req, res) => {
+    const { id, username, address } = req.body;
+
+    if (!id || !username || !address) {
+        return res.status(400).json({ Error: "Missing required fields" });
+    }
+
+    const sql = "INSERT INTO user(id, username, address) VALUES(?, ?, ?)";
+
+    db.query(sql, [id, username, address], (err, result) => {
+        if (err) {
+            console.error("Failed to add user:", err);
+            return res.status(500).json({ Error: "Failed to add user" });
+        }
+        res.json({ Message: "User Added Successfully" });
+    });
+});
+
+// Start Server
+app.listen(5000, () => {
+    console.log('Server is running on http://localhost:5000');
+});
