@@ -1,13 +1,21 @@
 
 import './App.css'
+import {Browserrouter ,Routes, Route} from 'react-router-dom'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-    <h2>Hello World</h2>
-        
+    <Browserrouter>
+    <Routes>
+     <Route path='' element={<Home/>}>
+
+
+     </Route>
+    </Routes>
+    
+    </Browserrouter>
       
     </>
   )
