@@ -38,21 +38,21 @@ app.get('/user', (req, res) => {
 });
 
 // Add New User
-app.post('/user', (req, res) => {
-    const { id, username, address } = req.body;
+app.post('/users', (req, res) => {
+    const { username, address } = req.body;
 
-    if (!id || !username || !address) {
-        return res.status(400).json({ Error: "Missing required fields" });
+    if (!username || !address) {
+        return res.status(400).json({ error: "Username and address are required" });
     }
 
-    const sql = "INSERT INTO user(id, username, address) VALUES(?, ?, ?)";
+    const sql = "INSERT INTO user(username, address) VALUES(?, ?)";
 
-    db.query(sql, [id, username, address], (err, result) => {
+    db.query(sql, [username, address], (err, result) => {
         if (err) {
             console.error("Failed to add user:", err);
-            return res.status(500).json({ Error: "Failed to add user" });
+            return res.status(500).json({ error: "Failed to add user" });
         }
-        res.json({ Message: "User Added Successfully" });
+        res.json({ message: "User added successfully", userId: result.insertId });
     });
 });
 
