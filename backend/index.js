@@ -41,14 +41,14 @@ app.post('/user', (req, res) => {
         return res.status(400).json({ error: "Username and address are required" });
     }
 
-    const sql = "INSERT INTO user(username, address) VALUES(?, ?)";
+    const sql = "INSERT INTO user(username, address) VALUES(?,?, ?)";
 
     db.query(sql, [username, address], (err, result) => {
         if (err) {
             console.error("Failed to add user:", err);
             return res.status(500).json({ error: "Failed to add user" });
         }
-        res.json({ message: "User added successfully", userId: result.insertId });
+        res.json(result);
     });
 });
 
