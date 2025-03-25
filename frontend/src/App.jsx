@@ -1,23 +1,10 @@
+import React from 'react'
 
-import './App.css'
-import {Browserrouter ,Routes, Route} from 'react-router-dom'
-
-
-function App() {
-  
+const App = () => {
   return (
-    <>
-    <Browserrouter>
-    <Routes>
-     <Route path='' element={<Home/>}>
-
-
-     </Route>
-    </Routes>
-    
-    </Browserrouter>
-      
-    </>
+    <div>
+      <h2>Hello React Js To backend</h2>
+    </div>
   )
 }
 
