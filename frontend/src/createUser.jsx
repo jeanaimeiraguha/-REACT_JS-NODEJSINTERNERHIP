@@ -7,7 +7,7 @@ const createUser = () => {
   //Passing data to backend 
   const handleSubmit=(event)=>{
 event.preventDefault();
-axios.post('localhost:5000/user/create',{username,address})
+axios.post('http://localhost:5000/user/create',{username,address})
  .then(res=>{
      console.log(res);
      navigate('/');
