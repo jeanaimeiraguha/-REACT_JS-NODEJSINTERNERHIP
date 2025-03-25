@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import User from './user';
-import CreateUser from './createUser'; // ✅ Capitalized component name
+import CreateUser from './createUser';
 
 const App = () => {
   return (
