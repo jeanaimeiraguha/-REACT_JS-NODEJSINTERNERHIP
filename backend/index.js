@@ -3,12 +3,8 @@ import mysql from 'mysql';
 import cors from 'cors';
 
 const app = express();
-
-// Middleware
 app.use(cors());
-app.use(express.json()); // To parse JSON data
-
-// Database Connection
+app.use(express.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -24,9 +20,9 @@ db.connect(err => {
     console.log("Connected successfully to database");
 });
 
-// Get List of All Users
+
 app.get('/user', (req, res) => {
-    const sql = "SELECT * FROM user"; // Ensure table name is correct
+    const sql = "SELECT * FROM user"; 
 
     db.query(sql, (err, result) => {
         if (err) {
@@ -37,8 +33,8 @@ app.get('/user', (req, res) => {
     });
 });
 
-// Add New User
-app.post('/users', (req, res) => {
+
+app.post('/user', (req, res) => {
     const { username, address } = req.body;
 
     if (!username || !address) {
@@ -56,7 +52,6 @@ app.post('/users', (req, res) => {
     });
 });
 
-// Start Server
 app.listen(5000, () => {
     console.log('Server is running on http://localhost:5000');
 });
