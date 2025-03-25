@@ -13,7 +13,7 @@ const User = () => {
 
   return (
     <div>
-      <Link to="/create">Add +</Link>  {/* ✅ Fixed Link component */}
+      <Link to="/create">Add +</Link>  
       <table border={1}>
         <thead>
           <tr>
@@ -31,7 +31,7 @@ const User = () => {
                 <td>
                   <button>Update</button>
                   <button>Delete</button>
-                </td>  {/* ✅ Wrapped buttons inside <td> */}
+                </td>  
               </tr>
             ))
           }
