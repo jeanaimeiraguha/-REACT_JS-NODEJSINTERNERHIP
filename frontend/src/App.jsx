@@ -1,20 +1,19 @@
-import User from './user'
-import React from 'react'
-// import 'bootstrap/dist/css/bootstrap.min.css'
-import {BrowserRouter,Routes,Router,Route} from 'react-router-dom'
-import createUser from './createUser'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import User from './user';
+import CreateUser from './createUser'; // ✅ Capitalized component name
+
 const App = () => {
   return (
     <div>
       <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<User/>}></Route>
-        <Route path='/create' element={<createUser/>}></Route>
-      </Routes>
-        
+        <Routes>
+          <Route path='/' element={<User />} />
+          <Route path='/create' element={<CreateUser />} /> {/* ✅ Capitalized component name */}
+        </Routes>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

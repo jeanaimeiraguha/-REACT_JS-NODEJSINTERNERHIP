@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const User = () => {
-  const [user, setUser] = useState([]);  
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:5000/user')
@@ -13,13 +13,13 @@ const User = () => {
 
   return (
     <div>
-<link to="/create">Add +</link>
+      <Link to="/create">Add +</Link>  {/* ✅ Fixed Link component */}
       <table border={1}>
         <thead>
           <tr>
             <th>Username</th>
             <th>Address</th>
-            <th colspan={2}>Action</th>
+            <th colSpan="2">Action</th>  
           </tr>
         </thead>
         <tbody>
@@ -28,8 +28,10 @@ const User = () => {
               <tr key={i}>
                 <td>{data.username}</td>
                 <td>{data.address}</td>  
-               <button>Update</button>
-               <button>Delete</button>
+                <td>
+                  <button>Update</button>
+                  <button>Delete</button>
+                </td>  {/* ✅ Wrapped buttons inside <td> */}
               </tr>
             ))
           }
