@@ -1,9 +1,16 @@
+import User from './user'
 import React from 'react'
-
+// import 'bootstrap/dist/css/bootstrap.min.css'
+import {BrowserRouter,Routes,Router,Route} from 'react-router-dom'
 const App = () => {
   return (
     <div>
-      <h2>Hello React Js To backend</h2>
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<User/>}></Route>
+      </Routes>
+        
+      </BrowserRouter>
     </div>
   )
 }
