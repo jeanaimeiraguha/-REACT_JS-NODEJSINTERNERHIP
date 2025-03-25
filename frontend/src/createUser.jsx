@@ -3,11 +3,18 @@ import React, { useState } from 'react'
 const createUser = () => {
   const[username, setUsername]= useState('')
   const[address, setAddress]= useState('')
+  const navigate=useNavigate();
   //Passing data to backend 
   const handleSubmit=(event)=>{
 event.preventDefault();
-axios.post('localhost:5000/user')
-  } 
+axios.post('localhost:5000/user/create',{username,address})
+ .then(res=>{
+     console.log(res);
+     navigate('/');
+ }).catch(err=>{
+     console.log(err)
+ }) 
+} 
   return (
     <div>
      <form onSubmit={handleSubmit}>
