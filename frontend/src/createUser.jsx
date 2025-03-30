@@ -7,13 +7,13 @@ const CreateUser = () => {
   const [address, setAddress] = useState('');
   const navigate = useNavigate();
 
-  // Passing data to backend
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:5000/user/create', { username, address })
       .then(res => {
         console.log(res);
-        navigate('/'); // Redirect to homepage
+        navigate('/');
       })
       .catch(err => {
         console.log(err);

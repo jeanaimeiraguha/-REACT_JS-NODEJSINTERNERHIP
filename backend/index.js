@@ -3,15 +3,18 @@ import mysql from 'mysql';
 import cors from 'cors';
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors()); 
+app.use(express.json()); 
+
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "crud"
+    database: "crud",
+    port: 3306 
 });
 
+// Connect to the database
 db.connect(err => {
     if (err) {
         console.error("Failed to connect to database:", err);
@@ -22,36 +25,98 @@ db.connect(err => {
 
 
 app.get('/user', (req, res) => {
-    const sql = "SELECT * FROM user"; 
-
+    const sql = "SELECT * FROM user";
+    
     db.query(sql, (err, result) => {
         if (err) {
-            console.error("Failed to retrieve users:", err);
-            return res.status(500).json({ Error: "Failed to retrieve users" });
+            console.error("SQL Error:", err);
+            return res.status(500).json({ error: "Failed to retrieve users" });
+        }
+        if (result.length === 0) {
+            return res.json({ message: "No users found" });
         }
         res.json(result);
     });
 });
 
 
-app.post('/user', (req, res) => {
-    const { username, address } = req.body;
+// app.get('/user/:id', (req, res) => {
+//     const { id } = req.params;
+//     const sql = "SELECT * FROM user WHERE id = ?";
+    
+//     db.query(sql, [id], (err, result) => {
+//         if (err) {
+//             console.error("SQL Error:", err);
+//             return res.status(500).json({ error: "Failed to retrieve user" });
+//         }
+//         if (result.length === 0) {
+//             return res.json({ message: "User not found" });
+//         }
+//         res.json(result[0]);
+//     });
+// });
 
-    if (!username || !address) {
-        return res.status(400).json({ error: "Username and address are required" });
-    }
+// // Add a new user
+// app.post('/user', (req, res) => {
+//     const { username, address } = req.body;
+    
+//     if (!username || !address) {
+//         return res.status(400).json({ error: "Username and address are required" });
+//     }
 
-    const sql = "INSERT INTO user(username, address) VALUES(?,?, ?)";
+//     const sql = "INSERT INTO user (username, address) VALUES (?, ?)";
+    
+//     db.query(sql, [username, address], (err, result) => {
+//         if (err) {
+//             console.error("SQL Error:", err);
+//             return res.status(500).json({ error: "Failed to add user" });
+//         }
+//         res.json({ message: "User added successfully", userId: result.insertId });
+//     });
+// });
 
-    db.query(sql, [username, address], (err, result) => {
-        if (err) {
-            console.error("Failed to add user:", err);
-            return res.status(500).json({ error: "Failed to add user" });
-        }
-        res.json(result);
-    });
-});
+// // Update a user
+// app.put('/users/:id', (req, res) => {
+//     const { id } = req.params;
+//     const { username, address } = req.body;
+    
+//     if (!username || !address) {
+//         return res.status(400).json({ error: "Username and address are required" });
+//     }
 
-app.listen(5000, () => {
-    console.log('Server is running on http://localhost:5000');
+//     const sql = "UPDATE user SET username = ?, address = ? WHERE id = ?";
+    
+//     db.query(sql, [username, address, id], (err, result) => {
+//         if (err) {
+//             console.error("SQL Error:", err);
+//             return res.status(500).json({ error: "Failed to update user" });
+//         }
+//         if (result.affectedRows === 0) {
+//             return res.json({ message: "User not found or no changes made" });
+//         }
+//         res.json({ message: "User updated successfully" });
+//     });
+// });
+
+// // Delete a user
+// app.delete('/users/:id', (req, res) => {
+//     const { id } = req.params;
+//     const sql = "DELETE FROM user WHERE id = ?";
+    
+//     db.query(sql, [id], (err, result) => {
+//         if (err) {
+//             console.error("SQL Error:", err);
+//             return res.status(500).json({ error: "Failed to delete user" });
+//         }
+//         if (result.affectedRows === 0) {
+//             return res.json({ message: "User not found" });
+//         }
+//         res.json({ message: "User deleted successfully" });
+//     });
+// });
+
+// Start the server
+const PORT = 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
