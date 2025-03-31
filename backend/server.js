@@ -38,7 +38,7 @@ app.post("/books", (req, res) => {
     const sql = "INSERT INTO books (`id`, `book_name`, `description`) VALUES (?)"; // Fixed column names
     const values = [12, "Kiswahili", "Learn Kiswahili"];
 
-    db.query(sql, [values], (err, result) => { // Added a callback to handle the query result
+    db.query(sql, [values], (err, result) => { 
         if (err) {
             console.error("Error inserting book:", err);
             return res.status(400).json("Failed to insert book");
