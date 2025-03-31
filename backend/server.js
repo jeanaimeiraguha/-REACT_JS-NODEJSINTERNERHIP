@@ -35,7 +35,7 @@ app.get("/books", (req, res) => {
 });
 
 app.post("/books", (req, res) => {
-    const sql = "INSERT INTO books (`id`, `book_name`, `description`) VALUES (?)"; // Fixed column names
+    const sql = "INSERT INTO books (`id`, `book_name`, `description`) VALUES (?)"; 
     const values = [12, "Kiswahili", "Learn Kiswahili"];
 
     db.query(sql, [values], (err, result) => { 
