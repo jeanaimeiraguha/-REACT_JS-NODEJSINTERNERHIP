@@ -1,19 +1,17 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import User from './user';
-import CreateUser from './createUser';
-
+import React from 'react'
+import {BrowserRouter  , Routes, Route} from 'react-router-dom'
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<User />} />
-          <Route path='/create' element={<CreateUser />} /> {/* ✅ Capitalized component name */}
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
-};
+  <BrowserRouter>
+  
+  <Router>
+    <Route>
 
-export default App;
+      
+    </Route>
+  </Router>
+  </BrowserRouter>
+  )
+}
+
+export default App
