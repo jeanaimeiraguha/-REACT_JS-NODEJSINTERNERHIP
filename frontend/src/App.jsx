@@ -5,10 +5,12 @@ const App = () => {
   <BrowserRouter>
   
   <Router>
-    <Route>
+    <Routes>
 
-      
-    </Route>
+<Route></Route>
+<Route path ="/" element={<Home/>} />
+<Route/>
+    </Routes>
   </Router>
   </BrowserRouter>
   )
