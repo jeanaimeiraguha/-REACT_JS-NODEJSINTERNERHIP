@@ -20,27 +20,30 @@
 
 
 
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import Home from './Home';
-import About from './About';
-
-function App() {
-  return (
+import About from './About'
+const App=()=>{
+  return(
+    <>
     <Router>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
-      </nav>
 
+      <nav>
+        <link  to ="/">Home</link>
+        <link  to ="/about"> About Us</link>
+      </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about' element={<About/>}/>
       </Routes>
     </Router>
-  );
+    
+    </>
+  )
 }
-
 export default App;
 
 
