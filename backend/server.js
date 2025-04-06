@@ -18,7 +18,7 @@ db.connect(err => {
 
 
 app.get('/', (req, res) => {
-  res.send(' Welcome to your Node.js API with MySQL!')
+  res.send(' Welcome to your Node.js API with MySQL')
 })
 
 app.listen(5000, () => {
