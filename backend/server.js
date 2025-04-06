@@ -20,6 +20,14 @@ db.connect(err => {
 app.get('/', (req, res) => {
   res.send('Welcome to your Node.js !');
 });
+app.post('/',(req,res)=>{
+  const {name,email}=req.body;
+  const sql ="INSERT INTO users(usernamename,email) VALUES(?,?)";
+  if(err){
+    res.status(500).send(err);
+  res.send({mesage:"User created successfully"})
+  }
+})
 
 app.listen(5000, () => {
   console.log('Server is running at http://localhost:5000');
