@@ -1,15 +1,22 @@
-import {BrowserRouter as Router , Routes,Route} from 'react-router-dom'
+import {BrowserRouter as Router , Routes,Route,Link} from 'react-router-dom'
 import About from './ABout';
+import Home from './Home';
+// import  Form from './Form'
 
 const App=()=>{
   return(
     <>
     <Router>
+      <nav>
+      <Link to="/">Home</Link>
+      <Link to="/About">About Us</Link>
+      </nav>
       <Routes>
-    <Route element="/" path={<Home/>}/>
-    <Route element="/about" path={<About/>}/>
+      <Route path='/' element={<Home />} />
+      <Route path='/about' element={<About />} />
       </Routes>
     </Router>
+    {/* <Form/> */}
     </>
   )
 }
