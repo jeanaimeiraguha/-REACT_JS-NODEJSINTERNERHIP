@@ -1,20 +1,26 @@
-// Let's get started with Node js crud APi
-import mysql from 'mysql'
 import express from 'express'
+import mysql from 'mysql'
+const app = express()
 app.use(express.json())
-
-const app=express();
-const db =mysql.createConnection({
-  host:"localhost",
-  user:"root",
-  password:"",
-  database:""
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'demo'  
 })
-db.connect((err)=>{
-  if(err) throw err;
-  console.log("Connected successfully")
+db.connect(err => {
+  if (err) {
+    console.log(' DB connection error:', err)
+    return
+  }
+  console.log('Connected to MySQL database "demo"')
 })
 
-app.listen(3000,()=>{
-  console.log("App is running on http://localhost:3000 ")
+
+app.get('/', (req, res) => {
+  res.send(' Welcome to your Node.js API with MySQL!')
+})
+
+app.listen(5000, () => {
+  console.log('Server is running at http://localhost:5000')
 })
