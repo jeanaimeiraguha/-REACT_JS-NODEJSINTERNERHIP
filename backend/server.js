@@ -17,9 +17,9 @@ db.connect(err => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Welcome to your Node.js !')
+  res.send('Welcome to your Node.js !');
 })
 
 app.listen(5000, () => {
-  console.log('Server is running at http://localhost:5000')
+  console.log('Server is running at http://localhost:5000');
 })
