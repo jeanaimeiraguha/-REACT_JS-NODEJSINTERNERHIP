@@ -3,35 +3,55 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const User = () => {
-  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/user')
-      .then(res => setUser(res.data))
-      .catch(err => console.log(err));
+    axios.get("http://localhost:1000")
+      .then(res => {
+        setUsers(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setError(err);
+        setLoading(false);
+      });
   }, []);
 
+  const addUser = () => {
+    console.log("Add User functionality not implemented yet.");
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+
   return (
-    <div>
-      <Link to="/create">Add +</Link>  
+    <div style={{ textAlign: "center", justifyContent: "center" }}>
+      <Link to="/create">Add +</Link>
       <table border={1}>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Username</th>
-            <th>Address</th>
-            <th colSpan="2">Action</th>  
+            <th>Email</th>
+            <th colSpan={2}>Operations</th>
           </tr>
         </thead>
         <tbody>
           {
-            user.map((data, i) => (
-              <tr key={i}>
+            users.map((data) => (
+              <tr key={data.id}>
+                <td>{data.id}</td>
                 <td>{data.username}</td>
-                <td>{data.address}</td>  
+                <td>{data.email}</td>
                 <td>
                   <button>Update</button>
                   <button>Delete</button>
-                </td>  
+                </td>
               </tr>
             ))
           }
@@ -39,6 +59,6 @@ const User = () => {
       </table>
     </div>
   );
-};
+}
 
 export default User;

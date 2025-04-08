@@ -1,23 +1,23 @@
-import {BrowserRouter as Router , Routes,Route,Link} from 'react-router-dom'
-import About from './ABout';
-import Home from './Home';
-// import  Form from './Form'
+// 
 
-const App=()=>{
-  return(
-    <>
-    <Router>
-      <nav>
-      <Link to="/">Home</Link>
-      <Link to="/About">About Us</Link>
-      </nav>
+import React from 'react'
+import {BrowserRouter as Router,Routes,Route, BrowserRouter} from 'react-router-dom'
+import User from './user'
+import Create from './Create'
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+      
       <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/about' element={<About />} />
+        <Route path='' element={<User/>}/>
+        <Route path='create' element={<Create/>}/>
+        {/* <Route path='about' element={<About/>}/> */}
+
       </Routes>
-    </Router>
-    {/* <Form/> */}
-    </>
+      </BrowserRouter>
+    </div>
   )
 }
-export default App;
+
+export default App
