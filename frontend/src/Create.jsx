@@ -1,23 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Create = () => {
- const[name,setUsername] =useState("");
- const[email,setemail]=useState("")
- const handlesubmit=(event)=>{
+  const [name, setUsername] = useState("");
+  const [email, setEmail] = useState("");  
+  const navigate = useNavigate();  
 
-     
- }
- 
-     return (
+  const handleSubmit = (event) => {
+    event.preventDefault();
+   
+    const userData = { username: name, email };
+
+    
+    axios.post("http://localhost:1000/create", userData)
+      .then((res) => {
+        console.log(res);
+       
+        navigate('/');
+      })
+      .catch((err) => console.error("Error creating user:", err));
+  }
+  
+  return (
     <div>
-      <form action="" onSubmit={handlesubmit}>
-         Username <input type="text" onChange={e=>setUsername(e.target.value)} /> <br />
-Email <input type="email" onChange={e=>setEmail(e.target.value)} />
-<br /> <br />
-<button>Add new</button>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username: 
+          <input 
+            type="text" 
+            value={name} 
+            onChange={e => setUsername(e.target.value)} 
+          />
+        </label>
+        <br />
+        <label>
+          Email: 
+          <input 
+            type="email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+          />
+        </label>
+        <br /> <br />
+        <button type="submit">Add new</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default Create
+export default Create;
