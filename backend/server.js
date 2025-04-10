@@ -125,8 +125,8 @@ import mysql from 'mysql'
 import express from 'express'
 import cors from 'cors'
 const app=express();
-app.use(express());
-app.use(cors);
+app.use(express.json());
+app.use(cors());
 const db=mysql.createConnection({
   host:"localhost",
   user:"root",
@@ -139,6 +139,21 @@ db.connect((err)=>{
 return
 }
  console.log("Connected successfully")
+})
+app.get("/",(req,res)=>{
+  const sql="SELECT * FROM users";
+  db.query(sql,(err,data)=>{
+    if(err) return res.status(400).json("Failed to select");
+    return res.status(200).json(data)
+  })
+})
+app.post("/users",(req,res)=>{
+  const {username,email}= req.body;
+  const sql="INSERT INTO users(username,email)VALUES(?)";
+  db.query(sql,(err,data)=>{
+    if(err) return res.status(500).json("Failed to insert");
+    retuen res.status(200).json("Inserted")
+  })
 })
 app.listen(1000,()=>{
   console.log("My App is Listening on http://localhost:1000")
