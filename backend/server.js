@@ -149,11 +149,14 @@ app.get("/",(req,res)=>{
 })
 app.post("/users",(req,res)=>{
   const {username,email}= req.body;
-  const sql="INSERT INTO users(username,email)VALUES(?)";
-  db.query(sql,(err,data)=>{
+  const sql="INSERT INTO users(username,email)VALUES(?,?)";
+  db.query(sql,[username,email],(err,data)=>{
     if(err) return res.status(500).json("Failed to insert");
-    retuen res.status(200).json("Inserted")
+    return res.status(200).json("Inserted")
   })
+})
+app.put("/users",(err,data)=>{
+  
 })
 app.listen(1000,()=>{
   console.log("My App is Listening on http://localhost:1000")
