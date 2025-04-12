@@ -22,7 +22,7 @@ const User = () => {
   }, []);
 
   const addUser = () => {
-    navigate('/create');  // Use navigate to go to the create user route
+    navigate('/create');  
   };
 
   if (loading) {
